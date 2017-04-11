@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Toby Allsopp toby@mi6.nz">
+  <meta name="dcterms.date" content="2017-04-12">
+  <title>C++17</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="index.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">C++17</h1>
+  <p class="subtitle">Auckland C++ Meetup</p>
+  <p class="author">Toby Allsopp <a href="mailto:toby@mi6.nz">toby@mi6.nz</a></p>
+  <p class="date">12 April 2017</p>
+</section>
+
+<section><section id="community" class="titleslide slide level1"><h1>Community</h1></section><section id="pacific" class="slide level2">
+<h2>PacifiC++</h2>
+<ul>
+<li class="fragment">A C++ conference in New Zealand!</li>
+<li class="fragment">Held in Christchurch 26th and 27th of October 2017</li>
+<li class="fragment">Keynotes from Jason Turner and Chandler Carruth</li>
+<li class="fragment">Taking submissions for talks</li>
+<li class="fragment">You should go!</li>
+<li class="fragment"><a href="https://pacificplusplus.com/" class="uri">https://pacificplusplus.com/</a></li>
+</ul>
+</section><section id="slack" class="slide level2">
+<h2>Slack</h2>
+<ul>
+<li>Like IRC</li>
+<li>Go to <a href="http://cpplang.diegostamigni.com/" class="uri">http://cpplang.diegostamigni.com/</a> to get invite</li>
+<li>Lots of very knowledgeable people willing to answer questions</li>
+</ul>
+</section><section id="twitter" class="slide level2">
+<h2>Twitter</h2>
+<ul>
+<li>Interesting people to follow:
+<ul>
+<li><a href="https://twitter.com/pacificplusplus" class="uri">https://twitter.com/pacificplusplus</a></li>
+<li><a href="https://twitter.com/c_plus_plus" class="uri">https://twitter.com/c_plus_plus</a></li>
+<li><a href="https://twitter.com/isocpp" class="uri">https://twitter.com/isocpp</a></li>
+<li><a href="https://twitter.com/meetingcpp" class="uri">https://twitter.com/meetingcpp</a></li>
+</ul></li>
+</ul>
+</section><section id="cppcast-podcast" class="slide level2">
+<h2>CppCast Podcast</h2>
+<ul>
+<li>Hosted by Rob Irving and Jason Turner</li>
+<li><a href="http://cppcast.com/" class="uri">http://cppcast.com/</a></li>
+<li>Approximately weekly episodes</li>
+</ul>
+</section></section>
+<section><section id="a-word-from-our-sponsor" class="titleslide slide level1"><h1>A word from our sponsor</h1></section><section id="jetbrains-license-raffle" class="slide level2">
+<h2>JetBrains license raffle</h2>
+<ul>
+<li>One 100% off voucher to give away</li>
+</ul>
+</section></section>
+<section><section id="c17-status" class="titleslide slide level1"><h1>C++17 Status</h1></section><section id="standardisation" class="slide level2">
+<h2>Standardisation</h2>
+<p><img src="https://isocpp.org/files/img/wg21-timeline-2017-03.png" alt="status" /> </p>
+</section><section id="c17-status-1" class="slide level2">
+<h2>C++17 Status</h2>
+<ul>
+<li>Draft International Standard</li>
+<li>Sent for ballot to national bodies</li>
+<li>Expected to be published in 2017</li>
+</ul>
+</section><section id="whats-in-it" class="slide level2">
+<h2>What's in it?</h2>
+<ul>
+<li>Actually quite a lot</li>
+<li>Too much to go through in any detail</li>
+</ul>
+</section><section id="whats-in-it-for-me" class="slide level2">
+<h2>What's in it for <em>me</em>?</h2>
+<ul>
+<li class="fragment">Depends who you are</li>
+<li class="fragment">I'll try to hit the changes that will have a big impact</li>
+</ul>
+</section><section id="whats-not-in-it" class="slide level2">
+<h2>What's <em>not</em> in it?</h2>
+<ul>
+<li class="fragment">Concepts</li>
+<li class="fragment">Ranges</li>
+<li class="fragment">Modules</li>
+<li class="fragment">😢🎻</li>
+</ul>
+</section><section id="acknowledgements" class="slide level2">
+<h2>Acknowledgements</h2>
+<ul>
+<li>Presentation style and examples stolen from Tony Van Eerd <a href="https://github.com/tvaneerd/cpp17_in_TTs" class="uri">https://github.com/tvaneerd/cpp17_in_TTs</a></li>
+<li>List of papers taken from <a href="https://isocpp.org/files/papers/p0636r0.html" class="uri">https://isocpp.org/files/papers/p0636r0.html</a> by Thomas Köppe</li>
+</ul>
+</section></section>
+<section><section id="structured-bindings" class="titleslide slide level1"><h1>Structured bindings</h1></section><section id="structured-bindings-1" class="slide level2">
+<h2>Structured bindings</h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="cf">for</span> (<span class="kw">auto</span>&amp;&amp; entry : map) {
+  <span class="kw">auto</span>&amp;&amp; key = entry.first;
+  <span class="kw">auto</span>&amp;&amp; value = entry.second;
+  cout &lt;&lt; key &lt;&lt; <span class="st">&quot; = &quot;</span> &lt;&lt; value;
+}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="cf">for</span> (<span class="kw">auto</span>&amp;&amp; [key, value] : map) {
+  cout &lt;&lt; key &lt;&lt; <span class="st">&quot; = &quot;</span> &lt;&lt; value;
+}</code></pre></div>
+</td>
+</tr>
+<tr>
+<th>
+C++17 human
+</th>
+<th>
+C++17 compiler
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">auto</span>&amp; [a, b] = foo();</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">auto</span>&amp; __tmp = foo();
+<span class="kw">auto</span>&amp; a = <span class="bu">std::</span>get&lt;<span class="dv">0</span>&gt;(__tmp); <span class="co">// not really</span>
+<span class="kw">auto</span>&amp; b = <span class="bu">std::</span>get&lt;<span class="dv">1</span>&gt;(__tmp); <span class="co">// references</span></code></pre></div>
+</td>
+</tr>
+</table>
+</section><section id="works-with" class="slide level2">
+<h2>Works with</h2>
+<ul>
+<li><code>pair</code></li>
+<li><code>tuple</code></li>
+<li><code>array</code></li>
+<li>arrays</li>
+<li>&quot;plain&quot; structs</li>
+<li>anything that allows <code>get&lt;N&gt;</code> like <code>tuple</code></li>
+</ul>
+</section><section id="compiler-support" class="slide level2">
+<h2>Compiler support</h2>
+<ul>
+<li>GCC 7</li>
+<li>Clang 4.0</li>
+<li>VS 2017 next toolchain update</li>
+</ul>
+</section></section>
+<section><section id="init-statement-for-if" class="titleslide slide level1"><h1>Init statement for if</h1></section><section id="init-statement-for-if-1" class="slide level2">
+<h2>Init statement for <code>if</code></h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">{
+  <span class="kw">auto</span> o = get_object();
+  <span class="cf">if</span> (o.valid()) {
+    <span class="co">// do stuff</span>
+  }
+}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="cf">if</span> (<span class="kw">auto</span> o = get_object(); o.valid()) {
+  <span class="co">// do stuff</span>
+}</code></pre></div>
+</td>
+</tr>
+</table>
+</section><section id="also-for-switch" class="slide level2">
+<h2>Also for <code>switch</code></h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="cf">switch</span> (<span class="kw">auto</span> o = get_object(); o.state()) {
+  <span class="cf">case</span> <span class="dv">1</span>:
+    <span class="co">// do stuff</span>
+    <span class="cf">break</span>;
+  <span class="cf">case</span> <span class="dv">2</span>:
+    <span class="co">// do other stuff</span>
+    [[<span class="at">fallthrough</span>]]; <span class="co">// LOOK HERE!</span>
+  <span class="cf">case</span> <span class="dv">3</span>:
+    <span class="co">// do more stuff</span>
+    <span class="cf">break</span>;
+}</code></pre></div>
+</section><section id="compiler-support-1" class="slide level2">
+<h2>Compiler support</h2>
+<ul>
+<li>GCC 7</li>
+<li>Clang 3.9</li>
+<li>VS 2017 not yet</li>
+</ul>
+</section><section id="synergy" class="slide level2">
+<h2>Synergy</h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>set&lt;<span class="dt">int</span>&gt; s;
+<span class="dt">int</span> x = <span class="dv">1</span>;
+{
+  <span class="kw">auto</span> i = s.insert(x);
+  <span class="cf">if</span> (i.second) {
+    existing_item(*i.first);
+  } <span class="cf">else</span> {
+    new_item(*i.first);
+  }
+}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>set&lt;<span class="dt">int</span>&gt; s;
+<span class="dt">int</span> x = <span class="dv">1</span>;
+<span class="cf">if</span> (<span class="kw">auto</span> [iterator, inserted] = s.insert(x);
+        inserted) {
+    existing_item(*iterator);
+} <span class="cf">else</span> {
+  new_item(*iterator);
+}</code></pre></div>
+</td>
+</tr>
+</table>
+</section></section>
+<section><section id="nested-namespaces" class="titleslide slide level1"><h1>Nested namespaces</h1></section><section id="nested-namespaces-1" class="slide level2">
+<h2>Nested namespaces</h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">namespace</span> foo {
+  <span class="kw">namespace</span> bar {
+    <span class="kw">namespace</span> baz {
+    }
+  }
+}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">namespace</span> foo:bar::baz {
+}</code></pre></div>
+</td>
+</tr>
+</table>
+</section><section id="compiler-support-2" class="slide level2">
+<h2>Compiler support</h2>
+<ul>
+<li>GCC 6</li>
+<li>Clang 3.6</li>
+<li>VS 2015.3</li>
+</ul>
+</section></section>
+<section><section id="optional" class="titleslide slide level1"><h1>Optional</h1></section><section id="optional-1" class="slide level2">
+<h2>Optional</h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">bool</span> parse(<span class="at">const</span> string&amp; s, <span class="dt">int</span>&amp; output);
+
+<span class="dt">int</span> output;
+<span class="cf">if</span> (parse(s, output)) {
+  process(output);
+}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">optional&lt;<span class="dt">int</span>&gt; parse(<span class="at">const</span> string&amp; s);
+
+<span class="cf">if</span> (<span class="kw">auto</span> result = parse(s)) {
+  process(*result);
+}</code></pre></div>
+</td>
+</tr>
+</table>
+</section><section id="compiler-support-3" class="slide level2">
+<h2>Compiler support</h2>
+<ul>
+<li>libstdc++ 7</li>
+<li>libc++ 4.0</li>
+<li>VS 2017</li>
+</ul>
+</section></section>
+<section><section id="variant" class="titleslide slide level1"><h1>Variant</h1></section><section id="variant-1" class="slide level2">
+<h2>Variant</h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">struct</span> open { <span class="dt">int</span> time_open; };
+<span class="kw">struct</span> closed { string closer; };
+<span class="kw">struct</span> state {
+  <span class="kw">enum</span> { OPEN, CLOSED } which;
+  open o; <span class="co">// only valid if OPEN</span>
+  closed c; <span class="co">// only valid if CLOSED</span>
+}
+
+<span class="dt">void</span> handle_state(open);
+<span class="dt">void</span> handle_state(closed);
+
+state s;
+<span class="cf">switch</span> (s.which) {
+  <span class="cf">case</span> state::OPEN:
+    handle_state(s.o);
+    <span class="cf">break</span>;
+  <span class="cf">case</span> state::CLOSED:
+    handle_state(s.c);
+    <span class="cf">break</span>;
+}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">struct</span> open { <span class="dt">int</span> time_open; };
+<span class="kw">struct</span> closed { string closer; };
+<span class="kw">using</span> state = variant&lt;open, closed&gt;;
+
+<span class="dt">void</span> handle_state(open);
+<span class="dt">void</span> handle_state(closed);
+
+state s;
+
+visit(
+  [](<span class="at">const</span> <span class="kw">auto</span>&amp; s) {
+    handle_state(s);
+  },
+  s);</code></pre></div>
+</td>
+</tr>
+</table>
+</section><section id="compiler-support-4" class="slide level2">
+<h2>Compiler support</h2>
+<ul>
+<li>libstdc++ 7</li>
+<li>libc++ 4.0</li>
+<li>VS 2017</li>
+</ul>
+</section></section>
+<section><section id="any" class="titleslide slide level1"><h1>Any</h1></section><section id="any-1" class="slide level2">
+<h2>Any</h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> *anything = <span class="kw">nullptr</span>;
+<span class="dt">int</span> i = <span class="dv">7</span>;
+<span class="bu">std::</span>string s = <span class="st">&quot;Hello&quot;</span>;
+anything = &amp;i;
+<span class="cf">if</span> (anything) {
+  <span class="dt">int</span> j = *<span class="kw">reinterpret_cast</span>&lt;<span class="dt">int</span>*&gt;(anything);
+  <span class="co">// UB if you got it wrong</span>
+}
+anything = &amp;s;</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>any anything;
+<span class="dt">int</span> i = <span class="dv">7</span>;
+<span class="bu">std::</span>string s = <span class="st">&quot;Hello&quot;</span>;
+anything = i;
+<span class="cf">if</span> (anything.has_value()) {
+  <span class="dt">int</span> j = <span class="bu">std::</span>any_cast&lt;<span class="dt">int</span>&gt;(anything);
+  <span class="co">// throws if you got it wrong</span>
+}
+anything = s; <span class="co">// copies the string</span></code></pre></div>
+</td>
+</tr>
+</table>
+</section><section id="compiler-support-5" class="slide level2">
+<h2>Compiler support</h2>
+<ul>
+<li>libstdc++ 7</li>
+<li>libc++ 4.0</li>
+<li>VS 2017</li>
+</ul>
+</section></section>
+<section><section id="filesystem" class="titleslide slide level1"><h1>Filesystem</h1></section><section id="filesystem-1" class="slide level2">
+<h2>Filesystem</h2>
+<ul>
+<li>Currently a Technical Specification</li>
+<li>Very similar to <code>boost::filesystem</code></li>
+<li>GCC - use <code>std::experimental</code></li>
+<li>Clang - use <code>std::experimental</code></li>
+<li>Visual Studio - use <code>std::experimental</code></li>
+</ul>
+</section></section>
+<section><section id="class-template-argument-deduction" class="titleslide slide level1"><h1>Class template argument deduction</h1></section><section id="deduction" class="slide level2">
+<h2>Deduction</h2>
+<ul>
+<li>Like for function templates</li>
+<li>Class template arguments are deduced from the arguments passed to the constructor</li>
+</ul>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">auto</span> p = <span class="bu">std::</span>pair&lt;<span class="dt">int</span>, <span class="dt">double</span>&gt;{<span class="dv">1</span>, <span class="fl">1.2</span>};
+<span class="kw">auto</span> p = <span class="bu">std::</span>make_pair(<span class="dv">1</span>, <span class="fl">1.2</span>);</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">auto</span> p = <span class="bu">std::</span>pair{<span class="dv">1</span>, <span class="fl">1.2</span>};</code></pre></div>
+</td>
+</tr>
+</table>
+</section><section id="deduction-guides" class="slide level2">
+<h2>Deduction guides</h2>
+<ul>
+<li>For every constructor that takes arguments matching the class template parameters, there is an implicit deduction guide</li>
+<li>You can write explicit deduction guides</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+<span class="kw">struct</span> s {
+  T x;
+};
+
+s(<span class="dt">int</span>) -&gt; s&lt;<span class="dt">double</span>&gt;;
+
+<span class="kw">auto</span> a = s{<span class="dv">7</span>}; <span class="co">// decltype(a) is s&lt;double&gt;</span></code></pre></div>
+</section><section id="compiler-support-6" class="slide level2">
+<h2>Compiler support</h2>
+<ul>
+<li>GCC 7</li>
+<li>Clang 5</li>
+<li>VS not yet</li>
+</ul>
+</section></section>
+<section><section id="if-constexpr" class="titleslide slide level1"><h1><code>if constexpr</code></h1></section><section id="if-constexpr-1" class="slide level2">
+<h2><code>if constexpr</code></h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+C++17
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">struct</span> s {
+  <span class="dt">int</span> i;
+  <span class="dt">double</span> d;
+};
+
+<span class="kw">template</span>&lt;<span class="dt">int</span> N&gt;
+<span class="bu">std::</span>conditional_t&lt;N==<span class="dv">0</span>, <span class="at">const</span> <span class="dt">int</span>&amp;, <span class="at">const</span> <span class="dt">double</span>&amp;&gt;
+get(<span class="at">const</span> s&amp;);
+
+<span class="kw">template</span>&lt;&gt;
+<span class="at">const</span> <span class="dt">int</span>&amp; get&lt;<span class="dv">0</span>&gt;(<span class="at">const</span> s&amp; s) {<span class="cf">return</span> s.i;}
+
+<span class="kw">template</span>&lt;&gt;
+<span class="at">const</span> <span class="dt">double</span>&amp; get&lt;<span class="dv">1</span>&gt;(<span class="at">const</span> s&amp; s) {<span class="cf">return</span> s.d;}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">struct</span> s {
+  <span class="dt">int</span> i;
+  <span class="dt">double</span> d;
+};
+
+<span class="kw">template</span>&lt;<span class="dt">int</span> N&gt;
+<span class="kw">auto</span>&amp; get(<span class="at">const</span> s&amp; s) {
+  <span class="cf">if</span> <span class="kw">constexpr</span> (N == <span class="dv">0</span>) {
+    <span class="cf">return</span> s.i;
+  }
+  <span class="cf">else</span> <span class="cf">if</span> <span class="kw">constexpr</span> (N == <span class="dv">1</span>) {
+    <span class="cf">return</span> s.d;
+  }
+}</code></pre></div>
+</td>
+</tr>
+</table>
+</section></section>
+<section><section id="the-future" class="titleslide slide level1"><h1>The future</h1></section><section id="concepts" class="slide level2">
+<h2>Concepts</h2>
+<ul>
+<li>Constraints on template arguments</li>
+<li>Currently a Technical Specification</li>
+<li>Has been cooking since before C++11</li>
+<li>The committee can't agree on some of the details</li>
+<li>Hopefully will be merged into C++20</li>
+<li>Available in GCC</li>
+</ul>
+</section><section id="concepts-example" class="slide level2">
+<h2>Concepts example</h2>
+<table>
+<tr>
+<th>
+C++14
+</th>
+<th>
+Concepts TS
+</th>
+</tr>
+<tr>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+<span class="kw">auto</span> binarySearch(T first, T second)
+{
+   <span class="co">//...</span>
+}</code></pre></div>
+</td>
+<td>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span> &lt;RandomAccessIterator T&gt;
+<span class="kw">auto</span> binarySearch(T first, T second)
+{
+   <span class="co">//...</span>
+}</code></pre></div>
+</td>
+</tr>
+<tr>
+<th>
+C++14 compiler
+</th>
+<th>
+Concepts compiler
+</th>
+</tr>
+<tr>
+<td>
+<pre><code>error: syntax error &#39;[&#39; unexpected
+error: gibberish
+error: more compiler gibberish
+error: for pages and pages
+...</code></pre>
+</td>
+<td>
+<pre><code>error: MyIter does not model RandomAccessIterator</code></pre>
+</td>
+</tr>
+</table>
+</section><section id="modules" class="slide level2">
+<h2>Modules</h2>
+<ul>
+<li>Replacement for <code>#include</code></li>
+<li>Promises vastly improved compilation times</li>
+<li>Draft TS</li>
+<li>Available in Visual Studio and Clang (with slight differences)</li>
+<li>Will probably go into C++20 (if those differences can be resolved)</li>
+</ul>
+</section><section id="ranges" class="slide level2">
+<h2>Ranges</h2>
+<ul>
+<li>Defines Concepts for the standard library (<code>Copyable</code>, <code>Iterator</code>, etc.)</li>
+<li>Adds versions of algorithms that take &quot;ranges&quot; instead of pairs of iterators</li>
+<li>A range is basically just an object with <code>begin()</code> and <code>end()</code> that return iterators</li>
+<li>Allows for much greater composability of algorithms</li>
+<li>Draft TS</li>
+<li>Available in cmcstl2 if you have Concepts (i.e. GCC)</li>
+<li>Available in range-v3 along with some really nice stuff on top</li>
+</ul>
+</section><section id="coroutines" class="slide level2">
+<h2>Coroutines</h2>
+<ul>
+<li>Allows functions to be suspended and resumed</li>
+<li>Really useful for async and lazy algorithms</li>
+<li>Draft TS</li>
+<li>Available in Visual Studio and a special branch of Clang</li>
+</ul>
+</section></section>
+<section><section id="questions" class="titleslide slide level1"><h1>Questions</h1></section></section>
+<section><section id="thank-you" class="titleslide slide level1"><h1>Thank you</h1></section></section>
+<section><section id="references" class="titleslide slide level1"><h1>References</h1></section><section id="section" class="slide level2">
+<h2></h2>
+<ul>
+<li><a href="https://github.com/tvaneerd/cpp17_in_TTs/blob/master/ALL_IN_ONE.md" class="uri">https://github.com/tvaneerd/cpp17_in_TTs/blob/master/ALL_IN_ONE.md</a></li>
+<li><a href="https://isocpp.org/files/papers/p0636r0.html" class="uri">https://isocpp.org/files/papers/p0636r0.html</a></li>
+<li><a href="http://en.cppreference.com/w/cpp/compiler_support" class="uri">http://en.cppreference.com/w/cpp/compiler_support</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html#status.iso.201z" class="uri">https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html#status.iso.201z</a></li>
+<li><a href="http://libcxx.llvm.org/cxx1z_status.html" class="uri">http://libcxx.llvm.org/cxx1z_status.html</a></li>
+<li><a href="https://docs.microsoft.com/en-us/cpp/visual-cpp-language-conformance" class="uri">https://docs.microsoft.com/en-us/cpp/visual-cpp-language-conformance</a></li>
+</ul>
+</section></section>
+<section><section id="significant-changes-i-havent-mentioned" class="titleslide slide level1"><h1>Significant changes I haven't mentioned</h1></section><section id="removals" class="slide level2">
+<h2>Removals</h2>
+<ul>
+<li>Remove trigraphs</li>
+<li>Remove <code>register</code></li>
+<li>Remove <code>operator++</code> for <code>bool</code></li>
+<li>Remove non-empty exception specifications</li>
+<li>Remove <code>auto_ptr</code> and other library features deprecated since C++11</li>
+<li>Remove allocator support from <code>function</code></li>
+</ul>
+</section><section id="deprecations" class="slide level2">
+<h2>Deprecations</h2>
+<ul>
+<li>Deprecate some C library headers</li>
+<li>Deprecate <code>allocator&lt;void&gt;</code></li>
+<li>Deprecate <code>std::iterator</code></li>
+<li>Deprecate <code>&lt;codecvt&gt;</code></li>
+<li>Deprecate <code>memory_order_consume</code> temporarily</li>
+<li>Deprecate <code>shared_ptr::unique</code></li>
+<li>Deprecate <code>result_of</code></li>
+</ul>
+</section><section id="language-changes" class="slide level2">
+<h2>Language changes</h2>
+<ul>
+<li><code>noexcept</code> is part of a function's type</li>
+<li>Guaranteed copy elision</li>
+<li>Dynamic allocation of over-aligned types</li>
+<li>Stricter order of expression evaluation</li>
+<li>UTF-8 character literals</li>
+<li>Hexadecimal floating point literals</li>
+<li>Different types for <code>begin</code> and <code>end</code> in range-based <code>for</code></li>
+</ul>
+</section><section id="language-changes-part-2" class="slide level2">
+<h2>Language changes part 2</h2>
+<ul>
+<li>Constexpr lambdas</li>
+<li>Lambda capture of <code>*this</code></li>
+<li>Inline variables</li>
+<li><code>__has_include</code></li>
+<li><code>[[fallthrough]]</code>, <code>[[nodiscard]]</code>, <code>[[maybe_unused]]</code></li>
+<li><code>std::byte</code></li>
+</ul>
+</section><section id="language-changes-part-3" class="slide level2">
+<h2>Language changes part 3</h2>
+<ul>
+<li>Single-argument <code>static_assert</code></li>
+<li>template<auto></li>
+<li>fold expressions</li>
+<li>Template template parameters can use <code>typename</code></li>
+<li>Pack expansion in <code>using</code></li>
+</ul>
+</section><section id="library-changes" class="slide level2">
+<h2>Library changes</h2>
+<ul>
+<li>parallel algorithms</li>
+<li>string_view</li>
+<li>mathematical special functions</li>
+<li><code>clamp</code>, <code>gcd</code>, <code>lcm</code>, <code>hypot</code></li>
+<li><code>shared_mutex</code></li>
+<li><code>scoped_lock</code></li>
+<li><code>shared_ptr</code> improvements</li>
+</ul>
+</section><section id="library-changes-part-2" class="slide level2">
+<h2>Library changes part 2</h2>
+<ul>
+<li>Hardware interference sizes</li>
+<li><code>apply</code>, <code>make_from_tuple</code></li>
+<li><code>not_fn</code></li>
+<li>Polymorhpic allocator</li>
+<li>Substring search functions</li>
+<li>Splicing for node-based containers</li>
+<li>Non-const <code>string::data()</code></li>
+<li><code>to_chars</code>, <code>from_chars</code></li>
+</ul>
+</section><section id="library-changes-part-3" class="slide level2">
+<h2>Library changes part 3</h2>
+<ul>
+<li><code>invoke</code> and associated traits</li>
+<li><code>void_t</code></li>
+<li><code>bool_constant</code></li>
+<li><code>conjunction</code>, <code>disjunction</code>, <code>negation</code></li>
+<li><code>is_swappable</code> etc.</li>
+<li><code>is_aggregate</code></li>
+<li><code>has_unique_object_representations</code></li>
+<li><code>as_const</code></li>
+<li>Traits variable templates</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: 0,
+        // Push each slide change to the browser history
+        history: true,
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '100%',
+        height: '100%',
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
