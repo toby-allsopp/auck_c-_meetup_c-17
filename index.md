@@ -10,7 +10,7 @@ css:
  - index.css
 ---
 
-# PacifiC++
+# Community
 
 ## PacifiC++
 
@@ -21,13 +21,37 @@ css:
 > - You should go!
 > - <https://pacificplusplus.com/>
 
-# JetBrains
+## Slack
+
+- Like IRC
+- Go to <http://cpplang.diegostamigni.com/> to get invite
+- Lots of very knowledgeable people willing to answer questions
+
+## Twitter
+
+- Interesting people to follow:
+    - <https://twitter.com/pacificplusplus>
+    - <https://twitter.com/c_plus_plus>
+    - <https://twitter.com/isocpp>
+    - <https://twitter.com/meetingcpp>
+
+## CppCast Podcast
+
+- Hosted by Rob Irving and Jason Turner
+- <http://cppcast.com/>
+- Approximately weekly episodes
+
+# A word from our sponsor
 
 ## JetBrains license raffle
 
 * One 100% off voucher to give away
 
 # C++17 Status
+
+## Standardisation
+
+![status](https://isocpp.org/files/img/wg21-timeline-2017-03.png)\ 
 
 ## C++17 Status
 
@@ -50,7 +74,7 @@ css:
 > - Concepts
 > - Ranges
 > - Modules
-> - SAD FACE WITH SINGLE TEAR AND TINY VIOLIN PLAYING
+> - 😢🎻
 
 ## Acknowledgements
 
@@ -544,6 +568,21 @@ error: MyIter does not model RandomAccessIterator
 * Really useful for async and lazy algorithms
 * Draft TS
 * Available in Visual Studio and a special branch of Clang
+
+# Questions
+
+# Thank you
+
+# References
+
+##
+
+* <https://github.com/tvaneerd/cpp17_in_TTs/blob/master/ALL_IN_ONE.md>
+* <https://isocpp.org/files/papers/p0636r0.html>
+* <http://en.cppreference.com/w/cpp/compiler_support>
+* <https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html#status.iso.201z>
+* <http://libcxx.llvm.org/cxx1z_status.html>
+* <https://docs.microsoft.com/en-us/cpp/visual-cpp-language-conformance>
 
 # Significant changes I haven't mentioned
 
